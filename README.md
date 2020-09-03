@@ -6,10 +6,10 @@
 
 vue + webpack + vueRouter + elementUi + mock数据
 
-## Build Setup
+### 项目启动
 
 ```bash
-# install dependencies
+# 安装依赖
 npm install
 
 # serve with hot reload at localhost:8080
