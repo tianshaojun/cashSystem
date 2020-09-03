@@ -2,7 +2,7 @@
 
 > 一个基于vue.js构建的一个收银管理系统，主要是为了练习vue技术
 
-## 技术栈
+### 技术栈
 
 前端 ：vue2 + webpack + vueRouter + element
 
