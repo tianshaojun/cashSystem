@@ -24,6 +24,7 @@ npm run build --report
 
 ### 项目截图
 
+![](https://github.com/tianshaojun/cashSystem/blob/master/img/01.jpg)
 
 
 
