@@ -4,7 +4,7 @@
 
 ### 技术栈
 
-vue + webpack + vueRouter + elementUi + mock数据
+vue + webpack + vueRouter + elementUi + axios + mock数据
 
 ### 项目启动
 

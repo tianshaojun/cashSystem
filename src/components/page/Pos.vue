@@ -6,34 +6,13 @@
           <el-tabs>
             <el-tab-pane label="点餐">
               <el-table :data="tableData" border style="width: 100%;">
-                <el-table-column
-                  prop="goodsName"
-                  label="商品"
-                ></el-table-column>
-                <el-table-column
-                  prop="count"
-                  label="量"
-                  width="50"
-                ></el-table-column>
-                <el-table-column
-                  prop="price"
-                  label="金额"
-                  width="70"
-                ></el-table-column>
+                <el-table-column prop="goodsName" label="商品"></el-table-column>
+                <el-table-column prop="count" label="量" width="50"></el-table-column>
+                <el-table-column prop="price" label="金额" width="70"></el-table-column>
                 <el-table-column label="操作" width="100" fixed="right">
                   <template slot-scope="scope">
-                    <el-button
-                      type="text"
-                      size="small"
-                      @click="delSingleGoods(scope.row)"
-                      >删除</el-button
-                    >
-                    <el-button
-                      type="text"
-                      size="small"
-                      @click="addOrderList(scope.row)"
-                      >增加</el-button
-                    >
+                    <el-button type="text" size="small" @click="delSingleGoods(scope.row)">删除</el-button>
+                    <el-button type="text" size="small" @click="addOrderList(scope.row)">增加</el-button>
                   </template>
                 </el-table-column>
               </el-table>
@@ -48,16 +27,12 @@
               <div class="order-btn">
                 <el-button type="warning">挂单</el-button>
                 <el-button type="danger" @click="delAllGoods()">删除</el-button>
-                <el-button type="success" @click="checkout()"> 结账</el-button>
+                <el-button type="success" @click="checkout()">结账</el-button>
               </div>
             </el-tab-pane>
 
-            <el-tab-pane label="挂单">
-              挂单
-            </el-tab-pane>
-            <el-tab-pane label="外卖">
-              外卖
-            </el-tab-pane>
+            <el-tab-pane label="挂单">挂单</el-tab-pane>
+            <el-tab-pane label="外卖">外卖</el-tab-pane>
           </el-tabs>
         </el-col>
 
@@ -67,11 +42,7 @@
             <div class="title">商品列表</div>
             <div class="often-goods-list">
               <ul>
-                <li
-                  v-for="(goods, index) in oftenGoods"
-                  :key="index"
-                  @click="addOrderList(goods)"
-                >
+                <li v-for="(goods, index) in oftenGoods" :key="index" @click="addOrderList(goods)">
                   <span>{{ goods.goodsName }}</span>
                   <span class="o-price">￥{{ goods.price }}元</span>
                 </li>
@@ -158,12 +129,10 @@ export default {
     document.getElementById("order-list").style.height = orderHeight + "px";
   },
   created() {
+    
     //获取商品列表
     axios
-      .get(
-        // "https://www.easy-mock.com/mock/5b8b30dbf032f03c5e71de7f/kuaican/oftenGoods"
-        "../../../static/mock/cookbookList.json"
-      )
+      .get("../../../static/mock/cookbookList.json")
       .then((response) => {
         // console.log(response);
         this.oftenGoods = response.data;
@@ -175,13 +144,9 @@ export default {
 
     //获取商品分类列表
     axios
-      .get(
-        // "https://www.easy-mock.com/mock/5b8b30dbf032f03c5e71de7f/kuaican/oftenGoods"
-        "../../../static/mock/category.json"
-      )
+      .get("../../../static/mock/category.json")
       .then((response) => {
         // console.log(response);
-        // this.oftenGoods=response.data;
         this.type0Goods = response.data[0];
         this.type1Goods = response.data[1];
         this.type2Goods = response.data[2];
@@ -277,7 +242,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .pos {
   font-size: 12px;
 }
