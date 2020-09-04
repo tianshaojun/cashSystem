@@ -5,14 +5,35 @@
         <el-col :span="7" class="pos-order" id="order-list">
           <el-tabs>
             <el-tab-pane label="点餐">
-              <el-table :data="tableData" border style="width: 100%;">
-                <el-table-column prop="goodsName" label="商品"></el-table-column>
-                <el-table-column prop="count" label="量" width="50"></el-table-column>
-                <el-table-column prop="price" label="金额" width="70"></el-table-column>
+              <el-table :data="tableData" border style="width: 100%">
+                <el-table-column
+                  prop="goodsName"
+                  label="商品"
+                ></el-table-column>
+                <el-table-column
+                  prop="count"
+                  label="量"
+                  width="50"
+                ></el-table-column>
+                <el-table-column
+                  prop="price"
+                  label="金额"
+                  width="70"
+                ></el-table-column>
                 <el-table-column label="操作" width="100" fixed="right">
                   <template slot-scope="scope">
-                    <el-button type="text" size="small" @click="delSingleGoods(scope.row)">删除</el-button>
-                    <el-button type="text" size="small" @click="addOrderList(scope.row)">增加</el-button>
+                    <el-button
+                      type="text"
+                      size="small"
+                      @click="delSingleGoods(scope.row)"
+                      >删除</el-button
+                    >
+                    <el-button
+                      type="text"
+                      size="small"
+                      @click="addOrderList(scope.row)"
+                      >增加</el-button
+                    >
                   </template>
                 </el-table-column>
               </el-table>
@@ -42,7 +63,11 @@
             <div class="title">商品列表</div>
             <div class="often-goods-list">
               <ul>
-                <li v-for="(goods, index) in oftenGoods" :key="index" @click="addOrderList(goods)">
+                <li
+                  v-for="(goods, index) in oftenGoods"
+                  :key="index"
+                  @click="addOrderList(goods)"
+                >
                   <span>{{ goods.goodsName }}</span>
                   <span class="o-price">￥{{ goods.price }}元</span>
                 </li>
@@ -124,12 +149,11 @@
 import axios from "axios";
 export default {
   name: "Pos",
-  mounted: function () {
+  mounted() {
     var orderHeight = document.body.clientHeight;
     document.getElementById("order-list").style.height = orderHeight + "px";
   },
   created() {
-    
     //获取商品列表
     axios
       .get("../../../static/mock/cookbookList.json")
@@ -294,7 +318,7 @@ export default {
   list-style: none;
   width: 23%;
   border: 1px solid #e5e9f2;
-  height: auot;
+  height: auto;
   overflow: hidden;
   background-color: #fff;
   padding: 8px;
