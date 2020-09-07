@@ -1,360 +1,128 @@
 <template>
-  <div class="pos">
-    <div>
-      <el-row>
-        <el-col :span="7" class="pos-order" id="order-list">
-          <el-tabs>
-            <el-tab-pane label="点餐">
-              <el-table :data="tableData" border style="width: 100%">
-                <el-table-column
-                  prop="goodsName"
-                  label="商品"
-                ></el-table-column>
-                <el-table-column
-                  prop="count"
-                  label="量"
-                  width="50"
-                ></el-table-column>
-                <el-table-column
-                  prop="price"
-                  label="金额"
-                  width="70"
-                ></el-table-column>
-                <el-table-column label="操作" width="100" fixed="right">
-                  <template slot-scope="scope">
-                    <el-button
-                      type="text"
-                      size="small"
-                      @click="delSingleGoods(scope.row)"
-                      >删除</el-button
-                    >
-                    <el-button
-                      type="text"
-                      size="small"
-                      @click="addOrderList(scope.row)"
-                      >增加</el-button
-                    >
-                  </template>
-                </el-table-column>
-              </el-table>
-
-              <div class="totalDiv">
-                <small>数量：</small>
-                <strong>{{ totalCount }}</strong> &nbsp;&nbsp;&nbsp;&nbsp;
-                <small>总计：</small>
-                <strong>{{ totalMoney }}</strong> 元
-              </div>
-
-              <div class="order-btn">
-                <el-button type="warning">挂单</el-button>
-                <el-button type="danger" @click="delAllGoods()">删除</el-button>
-                <el-button type="success" @click="checkout()">结账</el-button>
-              </div>
-            </el-tab-pane>
-
-            <el-tab-pane label="挂单">挂单</el-tab-pane>
-            <el-tab-pane label="外卖">外卖</el-tab-pane>
-          </el-tabs>
-        </el-col>
-
-        <!--商品列表-->
-        <el-col :span="17">
-          <div class="often-goods">
-            <div class="title">商品列表</div>
-            <div class="often-goods-list">
-              <ul>
-                <li
-                  v-for="(goods, index) in oftenGoods"
-                  :key="index"
-                  @click="addOrderList(goods)"
-                >
-                  <span>{{ goods.goodsName }}</span>
-                  <span class="o-price">￥{{ goods.price }}元</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="goods-type">
-            <el-tabs>
-              <el-tab-pane label="热门">
-                <ul class="cookList">
-                  <li
-                    v-for="(goods, index) in type0Goods"
-                    :key="index"
-                    @click="addOrderList(goods)"
-                  >
-                    <span class="foodImg">
-                      <img :src="goods.goodsImg" width="100%" />
-                    </span>
-                    <span class="foodName">{{ goods.goodsName }}</span>
-                    <span class="foodPrice">￥{{ goods.price }}元</span>
-                  </li>
-                </ul>
-              </el-tab-pane>
-              <el-tab-pane label="汤类">
-                <ul class="cookList">
-                  <li
-                    v-for="(goods, index) in type1Goods"
-                    :key="index"
-                    @click="addOrderList(goods)"
-                  >
-                    <span class="foodImg">
-                      <img :src="goods.goodsImg" width="100%" />
-                    </span>
-                    <span class="foodName">{{ goods.goodsName }}</span>
-                    <span class="foodPrice">￥{{ goods.price }}元</span>
-                  </li>
-                </ul>
-              </el-tab-pane>
-              <el-tab-pane label="菜类">
-                <ul class="cookList">
-                  <li
-                    v-for="(goods, index) in type2Goods"
-                    :key="index"
-                    @click="addOrderList(goods)"
-                  >
-                    <span class="foodImg">
-                      <img :src="goods.goodsImg" width="100%" />
-                    </span>
-                    <span class="foodName">{{ goods.goodsName }}</span>
-                    <span class="foodPrice">￥{{ goods.price }}元</span>
-                  </li>
-                </ul>
-              </el-tab-pane>
-              <el-tab-pane label="甜点">
-                <ul class="cookList">
-                  <li
-                    v-for="(goods, index) in type3Goods"
-                    :key="index"
-                    @click="addOrderList(goods)"
-                  >
-                    <span class="foodImg">
-                      <img :src="goods.goodsImg" width="100%" />
-                    </span>
-                    <span class="foodName">{{ goods.goodsName }}</span>
-                    <span class="foodPrice">￥{{ goods.price }}元</span>
-                  </li>
-                </ul>
-              </el-tab-pane>
-            </el-tabs>
-          </div>
-        </el-col>
-      </el-row>
-    </div>
+  <div class="thumb-example">
+    <!-- swiper1 -->
+    <swiper
+      class="swiper gallery-top"
+      :options="swiperOptionTop"
+      ref="swiperTop"
+    >
+      <swiper-slide class="slide-1"></swiper-slide>
+      <swiper-slide class="slide-2"></swiper-slide>
+      <swiper-slide class="slide-3"></swiper-slide>
+      <swiper-slide class="slide-4"></swiper-slide>
+      <swiper-slide class="slide-5"></swiper-slide>
+      <div
+        class="swiper-button-next swiper-button-white"
+        slot="button-next"
+      ></div>
+      <div
+        class="swiper-button-prev swiper-button-white"
+        slot="button-prev"
+      ></div>
+    </swiper>
+    <!-- swiper2 Thumbs -->
+    <swiper
+      class="swiper gallery-thumbs"
+      :options="swiperOptionThumbs"
+      ref="swiperThumbs"
+    >
+      <swiper-slide class="slide-1"></swiper-slide>
+      <swiper-slide class="slide-2"></swiper-slide>
+      <swiper-slide class="slide-3"></swiper-slide>
+      <swiper-slide class="slide-4"></swiper-slide>
+      <swiper-slide class="slide-5"></swiper-slide>
+    </swiper>
   </div>
 </template>
 
 <script>
-import axios from "axios";
-export default {
-  name: "Pos",
-  mounted() {
-    var orderHeight = document.body.clientHeight;
-    document.getElementById("order-list").style.height = orderHeight + "px";
-  },
-  created() {
-    //获取商品列表
-    axios
-      .get("../../../static/mock/cookbookList.json")
-      .then((response) => {
-        // console.log(response);
-        this.oftenGoods = response.data;
-        // console.log(this.oftenGoods);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+import { Swiper, SwiperSlide } from "vue-awesome-swiper";
+// import "swiper/css/swiper.css";
+// import "swiper/swiper-bundle.css";
+import "swiper/dist/css/swiper.css";
 
-    //获取商品分类列表
-    axios
-      .get("../../../static/mock/category.json")
-      .then((response) => {
-        // console.log(response);
-        this.type0Goods = response.data[0];
-        this.type1Goods = response.data[1];
-        this.type2Goods = response.data[2];
-        this.type3Goods = response.data[3];
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+export default {
+  name: "swiper-example-thumbs-gallery",
+  title: "Thumbs gallery with Two-way control",
+  components: {
+    Swiper,
+    SwiperSlide,
   },
   data() {
     return {
-      tableData: [], //订单列表的值
-      oftenGoods: [],
-      type0Goods: [],
-      type1Goods: [],
-      type2Goods: [],
-      type3Goods: [],
-      totalMoney: 0, //订单总价格
-      totalCount: 0, //订单商品总数量
+      swiperOptionTop: {
+        loop: true,
+        loopedSlides: 5, // looped slides should be the same
+        spaceBetween: 10,
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+      },
+      swiperOptionThumbs: {
+        loop: true,
+        loopedSlides: 5, // looped slides should be the same
+        spaceBetween: 10,
+        centeredSlides: true,
+        slidesPerView: "auto",
+        touchRatio: 0.2,
+        slideToClickedSlide: true,
+        // observer: true, //修改swiper自己或子元素时，自动初始化swiper
+        // observeParents: true,
+      },
     };
   },
-  methods: {
-    //添加订单列表的方法
-    addOrderList(goods) {
-      //console.log(goods);
-      this.totalCount = 0; //汇总数量清0
-      this.totalMoney = 0;
-      let isHave = false;
-      //判断是否这个商品已经存在于订单列表
-      for (let i = 0; i < this.tableData.length; i++) {
-        console.log(this.tableData[i].goodsId);
-        if (this.tableData[i].goodsId == goods.goodsId) {
-          isHave = true; //存在
-        }
-      }
-      //根据isHave的值判断订单列表中是否已经有此商品
-      if (isHave) {
-        //存在就进行数量添加
-        let arr = this.tableData.filter((o) => o.goodsId == goods.goodsId);
-        arr[0].count++;
-        //console.log(arr);
-      } else {
-        //不存在就推入数组
-        let newGoods = {
-          goodsId: goods.goodsId,
-          goodsName: goods.goodsName,
-          price: goods.price,
-          count: 1,
-        };
-        this.tableData.push(newGoods);
-      }
-
-      this.getAllMoney();
-    },
-    //删除单个商品
-    delSingleGoods(goods) {
-      //   console.log(goods);
-      this.tableData = this.tableData.filter((o) => o.goodsId != goods.goodsId);
-      this.getAllMoney();
-    },
-    //删除所有商品
-    delAllGoods() {
-      this.tableData = [];
-      this.totalCount = 0;
-      this.totalMoney = 0;
-    },
-    //汇总数量和金额
-    getAllMoney() {
-      this.totalCount = 0;
-      this.totalMoney = 0;
-      if (this.tableData) {
-        this.tableData.forEach((element) => {
-          this.totalCount += element.count;
-          this.totalMoney = this.totalMoney + element.price * element.count;
-        });
-      }
-    },
-    //结账方法模拟
-    checkout() {
-      if (this.totalCount != 0) {
-        this.tableData = [];
-        this.totalCount = 0;
-        this.totalMoney = 0;
-        this.$message({
-          message: "结账成功，感谢你又为店里出了一份力!",
-          type: "success",
-        });
-      } else {
-        this.$message.error("不能空结。老板了解你急切的心情！");
-      }
-    },
+  mounted() {
+    this.$nextTick(() => {
+      const swiperTop = this.$refs.swiperTop.swiper;
+      const swiperThumbs = this.$refs.swiperThumbs.swiper;
+      swiperTop.controller.control = swiperThumbs;
+      swiperThumbs.controller.control = swiperTop;
+    });
   },
 };
 </script>
 
 <style scoped>
-.pos {
-  font-size: 12px;
+.thumb-example {
+  height: 480px;
+  background-color: pink;
 }
 
-.pos-order {
-  background-color: #f9fafc;
-  border-right: 1px solid #c0ccda;
+.swiper .swiper-slide {
+  background-size: cover;
+  background-position: center;
 }
-
-.order-btn {
-  margin-top: 10px;
-  text-align: center;
+.swiper .swiper-slide.slide-1 {
+  background-image: url("../../assets/logo.png");
 }
-
-.title {
-  height: 20px;
-  border-bottom: 1px solid #d3dce6;
-  background-color: #f9fafc;
-  padding: 10px;
+.swiper .swiper-slide.slide-2 {
+  background-image: url("../../assets/logo.png");
 }
-
-.often-goods-list ul li {
-  list-style: none;
-  float: left;
-  border: 1px solid #e5e9f2;
-  padding: 10px;
-  margin: 5px;
-  background-color: #fff;
-  cursor: pointer;
+.swiper .swiper-slide.slide-3 {
+  background-image: url("../../assets/logo.png");
 }
-
-.goods-type {
-  clear: both;
+.swiper .swiper-slide.slide-4 {
+  background-image: url("../../assets/logo.png");
 }
-
-.o-price {
-  color: #58b7ff;
+.swiper .swiper-slide.slide-5 {
+  background-image: url("../../assets/logo.png");
 }
-
-.often-goods-list {
-  border-bottom: 1px solid #c0ccda;
-  height: auto;
-  overflow: hidden;
-  padding-bottom: 10px;
-  background-color: #f9fafc;
+.swiper.gallery-top {
+  height: 80%;
+  width: 100%;
 }
-
-.cookList li {
-  list-style: none;
-  width: 23%;
-  border: 1px solid #e5e9f2;
-  height: auto;
-  overflow: hidden;
-  background-color: #fff;
-  padding: 8px;
-  float: left;
-  margin: 2px;
-  cursor: pointer;
+.swiper.gallery-thumbs {
+  height: 20%;
+  box-sizing: border-box;
+  padding: 10px 0;
 }
-
-.cookList li span {
-  display: block;
-  float: left;
+.swiper.gallery-thumbs .swiper-slide {
+  width: 25%;
+  height: 100%;
+  opacity: 0.4;
 }
-
-.foodImg {
-  width: 40%;
-}
-
-.foodName {
-  font-size: 18px;
-  padding-left: 10px;
-  color: brown;
-}
-
-.foodPrice {
-  font-size: 16px;
-  padding-left: 10px;
-  padding-top: 10px;
-}
-
-.totalDiv {
-  height: auto;
-  overflow: hidden;
-  text-align: right;
-  font-size: 16px;
-  background-color: #fff;
-  border-bottom: 1px solid #e5e9f2;
-  padding: 10px;
+.swiper.gallery-thumbs .swiper-slide-active {
+  opacity: 1;
 }
 </style>
