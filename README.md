@@ -25,7 +25,7 @@ npm run build
 
 ### 打包配置
 
-assetsPublicPath: './'
+![](https://github.com/tianshaojun/cashSystem/blob/master/src/assets/md_img/02.jpg)
 
 
 
